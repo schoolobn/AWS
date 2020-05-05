@@ -10,7 +10,7 @@
         keypair: my-key2
     
     tasks:
-      - name: Create an ec2 instance
+       - name: Create an ec2 instance
         local_action: 
           module ec2:
           key_name: "{{ keypair }}"
