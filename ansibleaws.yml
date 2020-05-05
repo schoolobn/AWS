@@ -9,9 +9,9 @@
         ami: ami-0e342d72b12109f91  
         keypair: my-key2
     
-   tasks:
-     - name: Create an ec2 instance
-       local_action: 
+    tasks:
+      - name: Create an ec2 instance
+        local_action: 
          module ec2:
          key_name: "{{ keypair }}"
          group: launch-wizard-2
