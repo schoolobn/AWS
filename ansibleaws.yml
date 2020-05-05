@@ -23,6 +23,6 @@
                     sudo apt-get install nginx -y
          region: "{{ region }}"
          count: 1 
-         vpc_subnet_id: default
+         vpc_subnet_id: subnet-f927cb85
          assign_public_ip: yes
       register: ec2
