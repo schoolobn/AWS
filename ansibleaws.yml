@@ -1,0 +1,27 @@
+---
+  - name: Create a EC2 instance
+    hosts: localhost
+    gather_facts: False
+  
+    vars:
+        region: eu-central-1
+        instance_type: t2.micro
+        ami: ami-0e342d72b12109f91  
+        keypair: my-key2
+    tasks:
+  
+      - name: Create an ec2 instance
+        local_action: ec2
+           key_name: "{{ keypair }}"
+           group: launch-wizard-2
+           instance_type: "{{ instance_type}}"
+           image: "{{ ami }}"
+           wait: true
+           user_data: |
+               #!/bin/sh
+               sudo apt-get install nginx -y
+           region: "{{ region }}"
+           count: 1 
+           vpc_subnet_id: default
+           assign_public_ip: yes
+        register: ec2
