@@ -29,15 +29,3 @@
         name: "{{ item.public_ip }}"
         groups: hw
         with_items: "{{ ec2.instances }}"
-
-- name: Install app   
-  hosts: webservers
-  remote_user: ubuntu
-  become: yes
-  gather_facts: no
-  
-  tasks:
-  - name: Install Nginx
-      apt:
-        name: nginx
-        state: present
