@@ -24,8 +24,8 @@
          assign_public_ip: yes
       register: ec2
 
-      - name: Add new instance to host group
+    - name: Add new instance to host group
       add_host:
         hostname: "{{ item.public_ip }}"
-        groupname: launched
+        groupname: hw
       loop: "{{ ec2.instances }}"
