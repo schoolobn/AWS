@@ -49,3 +49,6 @@
      apt:
        name: nginx
        state: present
+   
+   - name: Upload default index.html for host
+      copy: src=~/site/index.html dest=/etc/nginx/sites-enabled/default/ mode=0644
