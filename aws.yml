@@ -32,13 +32,16 @@
     
     - name: Wait for SSH to come up
       delegate_to: "{{ item.public_dns_name }}"
+      wait_for_connection:
+        delay: 10
+        timeout: 60
       loop: "{{ ec2.instances }}"
     
 - name: Install nginx
   hosts: hw
   remote_user: ubuntu
   become: true
-  gather_facts: True
+  gather_facts: true
   tasks:
    - name: Install nginx
      apt:
