@@ -32,9 +32,10 @@
     
     - name: Wait for SSH to come up
       delegate_to: "{{ item.public_ip }}"
+      remote_user: ubuntu
       wait_for_connection:
         delay: 120
-        timeout: 500
+        timeout: 300
       loop: "{{ ec2.instances }}"
     
 - name: Install nginx
