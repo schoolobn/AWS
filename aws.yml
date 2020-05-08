@@ -34,8 +34,8 @@
       delegate_to: "{{ item.public_ip }}"
       remote_user: ubuntu
       wait_for_connection:
-        delay: 120
-        timeout: 300
+        delay: 20
+        timeout: 60
       loop: "{{ ec2.instances }}"
     
 - name: Install nginx
@@ -51,4 +51,4 @@
        state: present
    
    - name: Upload default index.html for host
-     copy: src=~/site/index.html dest=/etc/nginx/sites-enabled/default/ mode=0644
+     copy: src=~/site/index.html dest=/var/www/html/index.html mode=0644
