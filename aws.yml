@@ -20,7 +20,7 @@
          wait: true
          user_data: |
                     #!/bin/sh
-                    sudo apt-get install python-pip     
+                    sudo apt update && apt install python-pip     
          region: "{{ region }}"
          count: 1 
          vpc_subnet_id: subnet-f927cb85
