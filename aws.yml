@@ -30,7 +30,13 @@
         groupname: hw
       loop: "{{ ec2.instances }}"
     
-
+    - name: Wait for SSH to come up
+      delegate_to: "{{ item.public_ip }}"
+      remote_user: ubuntu
+      wait_for_connection:
+        delay: 60
+        timeout: 320
+      loop: "{{ ec2.instances }}"
     
 - name: Install nginx
   hosts: hw
@@ -45,4 +51,4 @@
        state: present
    
    - name: Upload default index.html for host
-     copy: src=~/site/index.html dest=/etc/nginx/sites-enabled/default/ 
+     copy: src=~/site/index.html dest=/etc/nginx/sites-enabled/default/ mode=0644
