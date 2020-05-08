@@ -17,10 +17,7 @@
          group: launch-wizard-2
          instance_type: "{{ instance_type}}"
          image: "{{ ami }}"
-         wait: true
-         user_data: |
-                    #!/bin/sh
-                    sudo apt update && apt install python-pip     
+         wait: true 
          region: "{{ region }}"
          count: 1 
          vpc_subnet_id: subnet-f927cb85
