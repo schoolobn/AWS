@@ -29,7 +29,14 @@
         hostname: "{{ item.public_ip }}"
         groupname: hw
       loop: "{{ ec2.instances }}"
-
+    
+    - name: Wait for SSH to come up
+      delegate_to: "{{ item.public_ip }}"
+      remote_user: ubuntu
+      wait_for_connection:
+        delay: 20
+        timeout: 60
+      loop: "{{ ec2.instances }}"
     
 - name: Install nginx
   hosts: hw
