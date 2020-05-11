@@ -1,6 +1,6 @@
 ---
 - name: Create a EC2 instance
-  hosts: localhost
+  hosts: local
   gather_facts: False
   
   vars:
