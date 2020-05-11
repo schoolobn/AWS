@@ -45,4 +45,4 @@
        state: latest
    
    - name: Upload default index.html for host
-     copy: src=~/site/index.html dest=/var/www/html/index.html mode=0644
+     copy: src=~/site/index.html dest=/var/www/html/index.html
