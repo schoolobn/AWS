@@ -19,8 +19,8 @@
          image_id: "{{ ami }}"
          wait: true 
          user_data: |
-                     #!/bin/sh
-                     sudo apt-get install python -y
+                    #!/bin/sh
+                    sudo apt-get install python -y
          region: "{{ region }}"
          vpc_subnet_id: subnet-f927cb85
          network:
