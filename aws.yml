@@ -40,7 +40,8 @@
   hosts: hw
   remote_user: ubuntu
   become: yes
-    
+  gather_facts: false  
+  
   tasks:
    - name: Install nginx
      apt:
