@@ -24,11 +24,13 @@
          assign_public_ip: yes
       register: ec2
 
-    - name: Add new instance to host group
+    - debug:
+      msg: "ip addres instance  =  {{ ec2.instances[0]| json_query('public_ip_address') }}"
+  
+    - name: Add new instance to hosts and hw group
       add_host:
-        hostname: "{{ item.public_ip }}"
-        groupname: hw
-      loop: "{{ ec2.instances }}"
+        hostname: "{{ ec2.instances[0]| json_query('public_ip_address') }}"
+        groups: hw
     
     - name: Wait for SSH to come up
       delegate_to: "{{ item.public_dns_name }}"
