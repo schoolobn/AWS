@@ -38,8 +38,7 @@
 - name: Install nginx
   hosts: hw
   remote_user: ubuntu
-  become: yes
-  gather_facts: no  
+  become: yes 
   
   tasks:
    - name: Install nginx
