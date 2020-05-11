@@ -36,7 +36,7 @@
   hosts: hw
   remote_user: ubuntu
   become: true
-  gather_facts: true
+
   
   tasks:
    - name: Install nginx
