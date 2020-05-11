@@ -1,8 +1,7 @@
 ---
 - name: Create a EC2 instance
   hosts: localhost
-  connection: local
-  gather_facts: False
+  gather_facts: no
   
   vars:
     region: eu-central-1
@@ -40,7 +39,7 @@
   hosts: hw
   remote_user: ubuntu
   become: yes
-  gather_facts: false  
+  gather_facts: no  
   
   tasks:
    - name: Install nginx
