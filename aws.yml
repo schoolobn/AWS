@@ -1,7 +1,7 @@
 ---
 - name: Create a EC2 instance
   hosts: localhost
-  gather_facts: False
+  gather_facts: no
   
   vars:
     region: eu-central-1
