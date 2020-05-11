@@ -16,7 +16,7 @@
          key_name: "{{ keypair }}"
          security_group: launch-wizard-2
          instance_type: "{{ instance_type}}"
-         image: "{{ ami }}"
+         image_id: "{{ ami }}"
          wait: true 
          region: "{{ region }}"
          vpc_subnet_id: subnet-f927cb85
