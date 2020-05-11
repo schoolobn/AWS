@@ -42,7 +42,7 @@
    - name: Install nginx
      apt:
        name: nginx
-       state: latest
-   
+       state: present
+         
    - name: Upload default index.html for host
      copy: src=~/site/index.html dest=/var/www/html/index.html
