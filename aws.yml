@@ -11,25 +11,23 @@
     
   tasks:
     - name: Create an ec2 instance
-      local_action: 
-         module: ec2
+      ec2_instance:    
          key_name: "{{ keypair }}"
          group: launch-wizard-2
          instance_type: "{{ instance_type}}"
          image: "{{ ami }}"
          wait: true 
          region: "{{ region }}"
-         count: 1 
          vpc_subnet_id: subnet-f927cb85
          assign_public_ip: yes
-      register: myinstanceinfo
+      register: ec2
 
     - debug:
-        msg: "ip addres instance  =  {{ myinstanceinfo.instances[0]| json_query('public_ip_address') }}"
+        msg: "ip addres instance  =  {{ ec2.instances[0]| json_query('public_ip_address') }}"
   
     - name: Add new instance to hosts and hw group
       add_host:
-        hostname: "{{ myinstanceinfo.instances[0]| json_query('public_ip_address') }}"
+        hostname: "{{ ec2.instances[0]| json_query('public_ip_address') }}"
         groups: hw
     
 - name: Install nginx
