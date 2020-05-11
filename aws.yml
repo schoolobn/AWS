@@ -12,8 +12,9 @@
   tasks:
     - name: Create an ec2 instance
       ec2_instance:    
+         name: "hw-ansible"
          key_name: "{{ keypair }}"
-         group: launch-wizard-2
+         security_group: launch-wizard-2
          instance_type: "{{ instance_type}}"
          image: "{{ ami }}"
          wait: true 
