@@ -1,0 +1,55 @@
+---
+- name: Create a EC2 instance
+  hosts: localhost
+  gather_facts: no
+  
+  vars:
+    region: eu-central-1
+    instance_type: t2.micro
+    ami: ami-0e342d72b12109f91  
+    keypair: my-key3
+    
+  tasks:
+    - name: Create an ec2 instance
+      ec2_instance:    
+         name: "hw-ansible"
+         key_name: "{{ keypair }}"
+         security_group: launch-wizard-2
+         instance_type: "{{ instance_type}}"
+         image_id: "{{ ami }}"
+         wait: true 
+         user_data: |
+                    #!/bin/sh
+                    sudo apt-get install -y python 
+         region: "{{ region }}"
+         vpc_subnet_id: subnet-f927cb85
+         network:
+          assign_public_ip: true
+      register: ec2
+
+    - debug:
+        msg: "ip addres instance  =  {{ ec2.instances[0]| json_query('public_ip_address') }}"
+  
+    - name: Add new instance to hosts and hw group
+      add_host:
+        hostname: "{{ ec2.instances[0]| json_query('public_ip_address') }}"
+        groups: hw
+    
+- name: Install nginx
+  hosts: hw
+  remote_user: ubuntu
+  become: yes 
+  
+  tasks:
+   - name: Install nginx
+     apt:
+       name: nginx
+       state: latest
+         
+   - name: Upload default index.html for host
+     copy: src=~/site/index.html dest=/var/www/html/index.html
+
+   - name: Start service nginx, if not started
+     service:
+       name: nginx
+       state: started
